@@ -100,17 +100,6 @@ class EightQueen{
 				System.out.println("success to put Row "+board.row);
 			}
 		}
-
-		/*
-		board.board[1][5] = 9;
-		board.checkDeadSpace(2);
-		board.checkDeadSpace(3);
-		board.checkDeadSpace(4);
-		board.checkDeadSpace(5);
-		board.checkDeadSpace(6);
-		board.checkDeadSpace(7);
-		board.printBoard();
-		*/
 	}
 
 }
