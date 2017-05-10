@@ -1,12 +1,22 @@
 class Board{
-	int[][] board = new int[8][8];
+	//チェスのボード (8 * 8)
+	int[][] board = new int[8][8];	//Queenが置けるマスは 0
+					//Queenが置けないマスは 0より大きく9より小さい数値
+					//Queueが置いてあるマスは 9を入れる
+					//Queenが置けるけど、後々積んでしまうマスは-1を入れる
+
+	//次にQueenを置くべき行
 	int row = 0;
 
+	//checkRow行目のどのマスが既に使えなくなっているのかを調べるmethod
 	void checkDeadSpace(int checkRow){
+		//checkRowより前の各行について
 		for(int i=0; i<checkRow; i++){
+			//各列について
 			for(int j=0; j<8; j++){
+				//もしQueen(9で表現) を見つけたら
 				if(board[i][j] == 9){
-					//縦をdeadSpaceに
+					//checkRow行目のj列は既にこのQueenの移動範囲に含まれているので、0より大きい値に変更
 					board[checkRow][j] += 1;
 
 					if(j - checkRow + i >= 0){
@@ -24,6 +34,7 @@ class Board{
 
 	}
 
+	//row行目の各列を全て0に戻すmethod
 	void clearDeadSpace(int row){
 		for(int i=0; i<8; i++){
 			this.board[row][i] = 0;
@@ -31,6 +42,7 @@ class Board{
 	}
 
 
+	//ただチェス盤を出力するだけのメソッド
 	void printBoard(){
 		System.out.println("+---+---+---+---+---+---+---+---+");
 		for(int i=0; i<8; i++){
@@ -43,6 +55,7 @@ class Board{
 		System.out.println("");
 	}
 
+	//Queenを置くメソッド
 	int putQueen(){
 		for(int i=0; i<8; i++){
 			if(this.board[this.row][i] == 0){
@@ -54,7 +67,7 @@ class Board{
 		return -1;
 	}
 
-
+	//一つ前の行に戻って、Queenを置き直すメソッド
 	int reputQueen(){
 		this.clearDeadSpace(this.row);
 		//一つ前の行に戻って
